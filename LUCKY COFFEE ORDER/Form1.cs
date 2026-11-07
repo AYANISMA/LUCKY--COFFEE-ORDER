@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -8,6 +8,7 @@ namespace LUCKY_COFFEE_ORDER
     public partial class Form1 : System.Windows.Forms.Form
     {
         Random rand = new Random();
+
         int customerCount = 0;
 
         public Form1()
@@ -22,12 +23,6 @@ namespace LUCKY_COFFEE_ORDER
 
         private void btncalculate_Click(object sender, EventArgs e)
         {
-            if (customerCount >= 5)
-            {
-                MessageBox.Show("Only 5 customers are allowed.");
-                return;
-            }
-
             string customername = txtname.Text;
 
             if (customername.Trim() == "")
@@ -87,7 +82,9 @@ namespace LUCKY_COFFEE_ORDER
             OrderList.Items.Add(customerCount + ") " + customername + " - " + drink);
 
             OrderList.Items.Add("Customer Name: " + customername);
+
             OrderList.Items.Add("Drink: " + drink + " ($" + price.ToString("0.00") + ")");
+
             OrderList.Items.Add("Quantity: " + quantity);
 
             if (chkstudent.Checked)
@@ -100,7 +97,9 @@ namespace LUCKY_COFFEE_ORDER
             }
 
             OrderList.Items.Add("Total Before Discount: $" + total.ToString("0.00"));
+
             OrderList.Items.Add("Total Discount: $" + discount.ToString("0.00"));
+
             OrderList.Items.Add("Final Total: $" + finaltotal.ToString("0.00"));
 
             OrderList.Items.Add("Lucky Numbers:");
@@ -179,6 +178,7 @@ namespace LUCKY_COFFEE_ORDER
                 }
 
                 OrderList.Items.Clear();
+
                 customerCount = 0;
 
                 using (StreamReader reader = File.OpenText("orders.txt"))
@@ -212,6 +212,7 @@ namespace LUCKY_COFFEE_ORDER
             OrderList.Items.Clear();
 
             lbltotal.Text = "Total Price: $0.00";
+
             lbllucky.Text = "Lucky Message:";
 
             chkstudent.Checked = false;
